@@ -1,5 +1,6 @@
 package com.view;
 
+import com.domain.employee;
 import com.service.EmpService;
 import com.utils.Utility;
 
@@ -25,11 +26,13 @@ public class MHLview {
                 System.out.println("请输入密码：");
                 String user = Utility.readString(50);
                 String pwd = Utility.readString(50);
-                System.out.println(EmpService.getEmp(user,pwd));
-                if (pwd.equals("123")) {
-                    secondMenu();
+
+                employee emp = EmpService.getEmp(user, pwd);
+
+                if (emp != null) {
+                    secondMenu(emp);
                 } else {
-                    System.out.println("密码错误");
+                    System.out.println("账号或密码错误");
                 }
             } else if (i == 2) {
                 loop = false;
@@ -41,9 +44,9 @@ public class MHLview {
         }
     }
 
-    public void secondMenu() {
+    public void secondMenu(employee emp) {
         while (loop) {
-            System.out.println("==========================满汉楼二级菜单==========================");
+            System.out.println("==========================满汉楼二级菜单["+emp.getName()+"]==========================");
             System.out.println("\t\t 1.显示菜单状态");
             System.out.println("\t\t 2.预定餐桌");
             System.out.println("\t\t 3.显示所有菜品");
