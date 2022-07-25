@@ -1,5 +1,6 @@
 package com.view;
 
+import com.service.EmpService;
 import com.utils.Utility;
 
 /**
@@ -24,6 +25,7 @@ public class MHLview {
                 System.out.println("请输入密码：");
                 String user = Utility.readString(50);
                 String pwd = Utility.readString(50);
+                System.out.println(EmpService.getEmp(user,pwd));
                 if (pwd.equals("123")) {
                     secondMenu();
                 } else {
