@@ -1,8 +1,12 @@
 package com.view;
 
+import com.domain.dinningTable;
 import com.domain.employee;
 import com.service.EmpService;
+import com.service.dinningTableService;
 import com.utils.Utility;
+
+import java.util.List;
 
 /**
  * @author yelanyanyu@zjxu.edu.cn
@@ -11,6 +15,12 @@ import com.utils.Utility;
 public class MHLview {
     private boolean loop = true;
     private String key = "";
+    private dinningTableService dinningTableService = new dinningTableService();
+
+    public void listDinningTable() {
+        List<dinningTable> dinningTables = dinningTableService.dinningTableList();
+        System.out.println(dinningTables);
+    }
 
     //显示主菜单
     public void mainmenu() {
@@ -46,7 +56,7 @@ public class MHLview {
 
     public void secondMenu(employee emp) {
         while (loop) {
-            System.out.println("==========================满汉楼二级菜单["+emp.getName()+"]==========================");
+            System.out.println("==========================满汉楼二级菜单[" + emp.getName() + "]==========================");
             System.out.println("\t\t 1.显示菜单状态");
             System.out.println("\t\t 2.预定餐桌");
             System.out.println("\t\t 3.显示所有菜品");
@@ -59,7 +69,8 @@ public class MHLview {
             // TODO: 2022/7/25 功能完善
             switch (i) {
                 case 1:
-                    System.out.println("餐桌状态");
+                    System.out.println("===============这是餐桌状态================");
+                    dinningTableService.dinningTableList();
                     break;
                 case 2:
                     System.out.println("预定餐桌");

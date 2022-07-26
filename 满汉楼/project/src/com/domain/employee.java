@@ -4,6 +4,7 @@ package com.domain;
  * @author yelanyanyu@zjxu.edu.cn
  * @version 1.0
  */
+@SuppressWarnings({"all"})
 public class employee {
     private int id;
     private String empId;
