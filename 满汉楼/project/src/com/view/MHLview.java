@@ -17,6 +17,10 @@ public class MHLview {
     private String key = "";
     private dinningTableService dinningTableService = new dinningTableService();
 
+    public void orderTable(String id, String orderName, String orderTel) {
+
+    }
+
     public void listDinningTable() {
         List<dinningTable> dinningTables = dinningTableService.dinningTableList();
         System.out.println(dinningTables);
@@ -36,8 +40,8 @@ public class MHLview {
                 System.out.println("请输入密码：");
                 String user = Utility.readString(50);
                 String pwd = Utility.readString(50);
-
-                employee emp = EmpService.getEmp(user, pwd);
+                EmpService empService = new EmpService();
+                employee emp = empService.getEmp(user, pwd);
 
                 if (emp != null) {
                     secondMenu(emp);
@@ -70,10 +74,11 @@ public class MHLview {
             switch (i) {
                 case 1:
                     System.out.println("===============这是餐桌状态================");
-                    dinningTableService.dinningTableList();
+                    listDinningTable();
                     break;
                 case 2:
-                    System.out.println("预定餐桌");
+                    System.out.println("================预定餐桌===================");
+                    // TODO: 2022/7/26 预定餐桌完成
                     break;
                 case 3:
                     System.out.println("显示了所有菜品");

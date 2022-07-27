@@ -1,7 +1,6 @@
 package com.utils;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
-
 import javax.sql.DataSource;
 import java.io.FileInputStream;
 import java.sql.Connection;
@@ -14,14 +13,13 @@ import java.util.Properties;
  * @author yelanyanyu@zjxu.edu.cn
  * @version 1.0
  */
-@SuppressWarnings({"all"})
 public class JDBCUtils_Druid {
     public static DataSource dataSource;
 
     static {
         Properties properties = new Properties();
         try {
-            properties.load(new FileInputStream("src\\druid.properties"));
+            properties.load(new FileInputStream("D:\\我的代码\\我的项目\\满汉楼\\project\\src\\druid.properties"));
             dataSource = DruidDataSourceFactory.createDataSource(properties);
         } catch (Exception e) {
             throw new RuntimeException(e);

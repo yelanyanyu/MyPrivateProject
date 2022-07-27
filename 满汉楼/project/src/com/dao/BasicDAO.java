@@ -45,7 +45,6 @@ public class BasicDAO<T> {
         Connection connection = null;
         try {
             connection = JDBCUtils_Druid.getConnection();
-            T query = queryRunner.query(connection, sql, new BeanHandler<>(clazz), param);
             return queryRunner.query(connection, sql, new BeanHandler<>(clazz), param);
         } catch (SQLException e) {
             throw new RuntimeException(e);
