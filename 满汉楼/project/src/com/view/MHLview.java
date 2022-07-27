@@ -1,9 +1,11 @@
 package com.view;
 
 import com.dao.dinningTableDao;
+import com.domain.Menu;
 import com.domain.dinningTable;
 import com.domain.employee;
 import com.service.EmpService;
+import com.service.MenuService;
 import com.service.dinningTableService;
 import com.utils.Utility;
 
@@ -18,6 +20,7 @@ public class MHLview {
     private String key = "";
     private dinningTableService dinningTableService = new dinningTableService();
     private dinningTableDao dinningTableDao = new dinningTableDao();
+    private MenuService menuService = new MenuService();
 
     public void orderTable(String id, String orderName, String orderTel) {
 
@@ -90,12 +93,17 @@ public class MHLview {
                     if (dinningTable == null || !dinningTable.getState().equals("空")) {
                         System.out.println("预定失败");
                     } else {
-                        dinningTableService.orderTable(String.valueOf(tableId),orderName,orderTel);
+                        dinningTableService.orderTable(String.valueOf(tableId), orderName, orderTel);
                         System.out.println("====================预定成功===============");
                     }
                     break;
                 case 3:
-                    System.out.println("显示了所有菜品");
+                    System.out.println("==================菜肴=============");
+                    System.out.println("id\t\t\tName\t\ttype\t\tprice");
+                    List<Menu> menuList = menuService.list();
+                    for (Menu menu : menuList) {
+                        System.out.println(menu);
+                    }
                     break;
                 case 4:
                     System.out.println("点餐服务");
