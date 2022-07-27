@@ -54,7 +54,7 @@ public class dinningTable {
 
     @Override
     public String toString() {
-        return "dinningTable{" +
+        return "\ndinningTable{" +
                 "id=" + id +
                 ", state='" + state + '\'' +
                 '}';

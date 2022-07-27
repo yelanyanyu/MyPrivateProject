@@ -1,5 +1,6 @@
 package com.view;
 
+import com.dao.dinningTableDao;
 import com.domain.dinningTable;
 import com.domain.employee;
 import com.service.EmpService;
@@ -16,6 +17,7 @@ public class MHLview {
     private boolean loop = true;
     private String key = "";
     private dinningTableService dinningTableService = new dinningTableService();
+    private dinningTableDao dinningTableDao = new dinningTableDao();
 
     public void orderTable(String id, String orderName, String orderTel) {
 
@@ -61,7 +63,7 @@ public class MHLview {
     public void secondMenu(employee emp) {
         while (loop) {
             System.out.println("==========================满汉楼二级菜单[" + emp.getName() + "]==========================");
-            System.out.println("\t\t 1.显示菜单状态");
+            System.out.println("\t\t 1.显示餐桌状态");
             System.out.println("\t\t 2.预定餐桌");
             System.out.println("\t\t 3.显示所有菜品");
             System.out.println("\t\t 4.点餐服务");
@@ -78,7 +80,19 @@ public class MHLview {
                     break;
                 case 2:
                     System.out.println("================预定餐桌===================");
-                    // TODO: 2022/7/26 预定餐桌完成
+                    System.out.print("请输入餐桌id：");
+                    int tableId = Utility.readInt();
+                    System.out.print("\n预定人：");
+                    String orderName = Utility.readString(50);
+                    System.out.print("\n电话号码：");
+                    String orderTel = Utility.readString(50);
+                    dinningTable dinningTable = dinningTableService.getdinningTable_byId(tableId);
+                    if (dinningTable == null || !dinningTable.getState().equals("空")) {
+                        System.out.println("预定失败");
+                    } else {
+                        dinningTableService.orderTable(String.valueOf(tableId),orderName,orderTel);
+                        System.out.println("====================预定成功===============");
+                    }
                     break;
                 case 3:
                     System.out.println("显示了所有菜品");
