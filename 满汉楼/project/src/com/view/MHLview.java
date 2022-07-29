@@ -6,6 +6,7 @@ import com.domain.dinningTable;
 import com.domain.employee;
 import com.service.EmpService;
 import com.service.MenuService;
+import com.service.billService;
 import com.service.dinningTableService;
 import com.utils.Utility;
 
@@ -15,12 +16,14 @@ import java.util.List;
  * @author yelanyanyu@zjxu.edu.cn
  * @version 1.0
  */
+@SuppressWarnings({"all"})
 public class MHLview {
     private boolean loop = true;
     private String key = "";
     private dinningTableService dinningTableService = new dinningTableService();
     private dinningTableDao dinningTableDao = new dinningTableDao();
     private MenuService menuService = new MenuService();
+    private billService billService = new billService();
 
     public void orderTable() {
         System.out.println("================预定餐桌===================");
@@ -54,13 +57,18 @@ public class MHLview {
         }
     }
 
+    public void listBill() {
+        // TODO: 2022/7/29 查看账单
+
+    }
+
 
     private void orderMenu(employee emp) {
         System.out.println("==============================点餐服务===========================");
         System.out.print("请输入点餐的桌号(-1 退出)：");
-        int id = Utility.readInt();
-        dinningTable dinningTable = dinningTableService.getdinningTable_byId(id);
-        if (id == -1) {
+        int dinningTableID = Utility.readInt();
+        dinningTable dinningTable = dinningTableService.getdinningTable_byId(dinningTableID);
+        if (dinningTableID == -1) {
             System.out.println("退出成功");
             return;
         }
@@ -92,7 +100,11 @@ public class MHLview {
             return;
         }
         //更新订单状态 利用billService
-
+        boolean flag = billService.orderMenu(menuId, nums, dinningTableID);
+        if (!flag) {
+            System.out.println("订餐失败，请联系管理员");
+        }
+        System.out.println("订餐成功!!!!!!!!!!!!!!!");
     }
 
     //显示主菜单

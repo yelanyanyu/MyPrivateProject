@@ -32,17 +32,13 @@ public class bill {
 
     @Override
     public String toString() {
-        // TODO: 2022/7/27 待修改格式
-        return "bill{" +
-                "id=" + id +
-                ", billId='" + billId + '\'' +
-                ", menuId=" + menuId +
-                ", nums=" + nums +
-                ", money=" + money +
-                ", dinningTableId=" + dinningTableId +
-                ", billDate=" + billDate +
-                ", state='" + state + '\'' +
-                '}';
+        return  id +
+                "\t\t" + menuId +
+                "\t\t\t" + nums +
+                "\t\t\t" + money +
+                "\t" + dinningTableId +
+                "\t\t" + billDate +
+                "\t\t" + state ;
     }
 
     public int getId() {

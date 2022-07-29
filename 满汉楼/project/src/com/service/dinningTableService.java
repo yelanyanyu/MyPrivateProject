@@ -34,4 +34,9 @@ public class dinningTableService {
     public dinningTable getdinningTable_byId(int id) {
         return dao.QuerySingleLine("select * from dinningTable where id=?", dinningTable.class, id);
     }
+
+    public boolean updateState(int tableId,String content) {
+        int update = dao.update("update dinningTable set state=? where id=?", content,tableId);
+        return update > 0 ? true : false;
+    }
 }
