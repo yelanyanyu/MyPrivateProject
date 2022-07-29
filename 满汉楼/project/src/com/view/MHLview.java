@@ -22,13 +22,77 @@ public class MHLview {
     private dinningTableDao dinningTableDao = new dinningTableDao();
     private MenuService menuService = new MenuService();
 
-    public void orderTable(String id, String orderName, String orderTel) {
-
+    public void orderTable() {
+        System.out.println("================预定餐桌===================");
+        System.out.print("请输入餐桌id：");
+        int tableId = Utility.readInt();
+        System.out.print("\n预定人：");
+        String orderName = Utility.readString(50);
+        System.out.print("\n电话号码：");
+        String orderTel = Utility.readString(50);
+        dinningTable dinningTable = dinningTableService.getdinningTable_byId(tableId);
+        if (dinningTable == null || !dinningTable.getState().equals("空")) {
+            System.out.println("预定失败");
+        } else {
+            dinningTableService.orderTable(String.valueOf(tableId), orderName, orderTel);
+            System.out.println("====================预定成功===============");
+        }
     }
 
-    public void listDinningTable() {
+    private void listDinningTable() {
+        System.out.println("===============这是餐桌状态================");
         List<dinningTable> dinningTables = dinningTableService.dinningTableList();
         System.out.println(dinningTables);
+    }
+
+    private void listMenu() {
+        System.out.println("==================菜肴=============");
+        System.out.println("id\t\t\tName\t\ttype\t\tprice");
+        List<Menu> menuList = menuService.list();
+        for (Menu menu : menuList) {
+            System.out.println(menu);
+        }
+    }
+
+
+    private void orderMenu(employee emp) {
+        System.out.println("==============================点餐服务===========================");
+        System.out.print("请输入点餐的桌号(-1 退出)：");
+        int id = Utility.readInt();
+        dinningTable dinningTable = dinningTableService.getdinningTable_byId(id);
+        if (id == -1) {
+            System.out.println("退出成功");
+            return;
+        }
+        if (dinningTable == null) {
+            System.out.println("找不到对应餐桌！！！！！！！！！！！！！");
+            return;
+        }
+        System.out.print("请输入菜品编号(-1 退出)：");
+        int menuId = Utility.readInt();
+        Menu menu = menuService.getMenu_ById(menuId);
+        if (menuId == -1) {
+            System.out.println("退出成功");
+            return;
+        }
+        if (menu == null) {
+            System.out.println("找不到对应餐桌！！！！！！！！！！！！！");
+            return;
+        }
+        System.out.print("请输入菜品数量(-1 退出)：");
+        int nums = Utility.readInt();
+        if (nums == -1) {
+            System.out.println("退出成功");
+            return;
+        }
+        System.out.print("点菜与否？(Y/N)：");
+        String s = Utility.readString(1);
+        if (s.equals("N")) {
+            System.out.println("退出成功");
+            return;
+        }
+        //更新订单状态 利用billService
+
     }
 
     //显示主菜单
@@ -78,35 +142,16 @@ public class MHLview {
             // TODO: 2022/7/25 功能完善
             switch (i) {
                 case 1:
-                    System.out.println("===============这是餐桌状态================");
                     listDinningTable();
                     break;
                 case 2:
-                    System.out.println("================预定餐桌===================");
-                    System.out.print("请输入餐桌id：");
-                    int tableId = Utility.readInt();
-                    System.out.print("\n预定人：");
-                    String orderName = Utility.readString(50);
-                    System.out.print("\n电话号码：");
-                    String orderTel = Utility.readString(50);
-                    dinningTable dinningTable = dinningTableService.getdinningTable_byId(tableId);
-                    if (dinningTable == null || !dinningTable.getState().equals("空")) {
-                        System.out.println("预定失败");
-                    } else {
-                        dinningTableService.orderTable(String.valueOf(tableId), orderName, orderTel);
-                        System.out.println("====================预定成功===============");
-                    }
+                    orderTable();
                     break;
                 case 3:
-                    System.out.println("==================菜肴=============");
-                    System.out.println("id\t\t\tName\t\ttype\t\tprice");
-                    List<Menu> menuList = menuService.list();
-                    for (Menu menu : menuList) {
-                        System.out.println(menu);
-                    }
+                    listMenu();
                     break;
                 case 4:
-                    System.out.println("点餐服务");
+                    orderMenu(emp);
                     break;
                 case 5:
                     System.out.println("查看账单");

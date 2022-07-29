@@ -25,6 +25,12 @@ public class dinningTableService {
 
     }
 
+    /**
+     * 通过餐桌 id 得到相应的餐桌对象
+     *
+     * @param id 餐桌 id
+     * @return
+     */
     public dinningTable getdinningTable_byId(int id) {
         return dao.QuerySingleLine("select * from dinningTable where id=?", dinningTable.class, id);
     }

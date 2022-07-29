@@ -7,5 +7,4 @@ import com.domain.employee;
  * @version 1.0
  */
 public class EmpDao extends BasicDAO<employee>{
-    // TODO: 2022/7/25 这里写特殊需求
 }

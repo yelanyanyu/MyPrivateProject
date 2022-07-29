@@ -7,5 +7,4 @@ import com.domain.Menu;
  * @version 1.0
  */
 public class MenuDao extends BasicDAO<Menu>{
-    // TODO: 2022/7/27 这里写特殊需求
 }
