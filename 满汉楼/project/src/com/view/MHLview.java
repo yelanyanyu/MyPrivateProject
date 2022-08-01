@@ -57,9 +57,9 @@ public class MHLview {
         }
     }
 
-    public void listBill() {
-        // TODO: 2022/7/29 查看账单
-
+    public void listBill1() {
+        System.out.println("\n编号\t\t菜品号\t\t菜品量\t\t金额\t\t桌号\t\t日期\t\t\t\t\t\t\t状态");
+        billService.list();
     }
 
 
@@ -166,9 +166,13 @@ public class MHLview {
                     orderMenu(emp);
                     break;
                 case 5:
-                    System.out.println("查看账单");
+                    listBill1();
                     break;
                 case 6:
+                    // TODO: 2022/8/1 结账
+                    //1.查看某个餐桌是否有未结账的菜单
+                    //2.修改bill表的状态（state）与dinningTable表的信息
+                    //3.
                     System.out.println("结账");
                     break;
                 case 9:

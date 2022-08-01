@@ -24,6 +24,7 @@ public class billService {
 
     /**
      * 更新账单信息
+     *
      * @param menuId
      * @param nums
      * @param dinningTableId
@@ -38,6 +39,7 @@ public class billService {
 
     /**
      * 点餐方法
+     *
      * @param menuId
      * @param nums
      * @param dinningTableId
@@ -50,6 +52,25 @@ public class billService {
             return false;
         }
         //更新餐桌状态为就餐中
-        return dinningTableService.updateState(dinningTableId,"就餐中");
+        return dinningTableService.updateState(dinningTableId, "就餐中");
     }
+
+    public boolean hasUnpaidBill(int id, String str) {
+        bill bill = billDao.QuerySingleLine("select * from bill where id=? and state='未结账'", bill.class, id);
+        return bill != null;
+    }
+
+    /**
+     * 1.选择支付方式，更新bill表所有数据的支付状态(State)和支付时间(覆盖billDate);
+     * 2.(*)存入后台数据库
+     * 3.餐桌状态更改为空;
+     * 4.打印最终账单;
+     *
+     * @return
+     */
+    public boolean payAllBill() {
+        // TODO: 2022/7/29 结账
+        return false;
+    }
+
 }

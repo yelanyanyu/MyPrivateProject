@@ -39,4 +39,8 @@ public class dinningTableService {
         int update = dao.update("update dinningTable set state=? where id=?", content,tableId);
         return update > 0 ? true : false;
     }
+
+    public boolean resetData(){
+        // TODO: 2022/8/1 结账，重置餐桌状态
+    }
 }
