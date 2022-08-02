@@ -62,6 +62,36 @@ public class MHLview {
         billService.list();
     }
 
+    private void payBill() {
+        // TODO: 2022/8/2 20220802
+        System.out.println("============================结账服务===========================");
+        System.out.print("请选择要结账的餐桌编号(-1退出)：");
+        int dinningTableID = Utility.readInt();
+        if (dinningTableID == -1) {
+            System.out.println("========取消结账=======");
+            return;
+        }
+
+        //验证餐桌是否存在
+        dinningTable dinningTable = dinningTableService.getdinningTable_byId(dinningTableID);
+        if (dinningTable == null) {
+            System.out.println("=====该餐桌不存在=====");
+            return;
+        }
+
+        //验证是否存在未支付的订单
+        if (!billService.hasUnpaidBill(dinningTableID)) {
+            System.out.println("=====该餐桌没有待支付的订单=====");
+            return;
+        }
+
+        System.out.print("结账方式(现金/支付宝/微信/其他)：");
+        String payMode = Utility.readString(20, "");
+        // TODO: 2022/8/2 结账
+        billService.payAllBill();
+
+    }
+
 
     private void orderMenu(employee emp) {
         System.out.println("==============================点餐服务===========================");
@@ -116,7 +146,6 @@ public class MHLview {
             System.out.println("请输入你的选择:");
             int i = Utility.readInt();
             if (i == 1) {
-                // TODO: 2022/7/25 登录界面
                 System.out.println("请输入账号：");
                 System.out.println("请输入密码：");
                 String user = Utility.readString(50);
@@ -173,6 +202,7 @@ public class MHLview {
                     //1.查看某个餐桌是否有未结账的菜单
                     //2.修改bill表的状态（state）与dinningTable表的信息
                     //3.
+                    payBill();
                     System.out.println("结账");
                     break;
                 case 9:
@@ -185,4 +215,6 @@ public class MHLview {
             }
         }
     }
+
+
 }

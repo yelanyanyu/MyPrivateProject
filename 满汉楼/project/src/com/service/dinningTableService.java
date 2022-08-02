@@ -35,12 +35,13 @@ public class dinningTableService {
         return dao.QuerySingleLine("select * from dinningTable where id=?", dinningTable.class, id);
     }
 
-    public boolean updateState(int tableId,String content) {
-        int update = dao.update("update dinningTable set state=? where id=?", content,tableId);
+    public boolean updateState(int tableId, String content) {
+        int update = dao.update("update dinningTable set state=? where id=?", content, tableId);
         return update > 0 ? true : false;
     }
 
-    public boolean resetData(){
-        // TODO: 2022/8/1 结账，重置餐桌状态
+    public boolean resetData(int id) {
+        int update = dao.update("update dinningTable set state='空',orderName='',orderTel='' where id=?", id);
+        return update > 0;
     }
 }

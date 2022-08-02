@@ -55,7 +55,7 @@ public class billService {
         return dinningTableService.updateState(dinningTableId, "就餐中");
     }
 
-    public boolean hasUnpaidBill(int id, String str) {
+    public boolean hasUnpaidBill(int id) {
         bill bill = billDao.QuerySingleLine("select * from bill where id=? and state='未结账'", bill.class, id);
         return bill != null;
     }
