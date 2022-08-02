@@ -68,9 +68,17 @@ public class billService {
      *
      * @return
      */
-    public boolean payAllBill() {
+    public boolean payAllBill(int dinningTableID, String payMode) {
         // TODO: 2022/7/29 结账
-        return false;
+        //1.更新bill
+        int update = billDao.update("update bill set state=?,billDate=now() where id=?", payMode, dinningTableID);
+        if (update <= 0) {
+            System.out.println("结账失败");
+            return false;
+        }
+
+        //2.更新table的状态
+        return dinningTableService.resetData(dinningTableID);
     }
 
 }
