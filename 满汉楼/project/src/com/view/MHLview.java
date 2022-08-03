@@ -88,7 +88,12 @@ public class MHLview {
         System.out.print("结账方式(现金/支付宝/微信/其他)：");
         String payMode = Utility.readString(20, "");
         // TODO: 2022/8/2 结账
-        billService.payAllBill(dinningTableID,payMode);
+        if (billService.payAllBill(dinningTableID,payMode)) {
+            System.out.println("======结账成功======");
+        }else {
+            System.out.println("======结账失败======");
+            return;
+        }
 
     }
 

@@ -56,8 +56,8 @@ public class billService {
     }
 
     public boolean hasUnpaidBill(int id) {
-        bill bill = billDao.QuerySingleLine("select * from bill where id=? and state='未结账'", bill.class, id);
-        return bill != null;
+        bill bill = billDao.QuerySingleLine("select * from bill where dinningTableId=? and state='未支付'", bill.class, id);
+        return !(bill == null);
     }
 
     /**
@@ -71,7 +71,7 @@ public class billService {
     public boolean payAllBill(int dinningTableID, String payMode) {
         // TODO: 2022/7/29 结账
         //1.更新bill
-        int update = billDao.update("update bill set state=?,billDate=now() where id=?", payMode, dinningTableID);
+        int update = billDao.update("update bill set state=?,billDate=now() where dinningTableId=?", payMode, dinningTableID);
         if (update <= 0) {
             System.out.println("结账失败");
             return false;
