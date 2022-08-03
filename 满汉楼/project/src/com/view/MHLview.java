@@ -4,10 +4,7 @@ import com.dao.dinningTableDao;
 import com.domain.Menu;
 import com.domain.dinningTable;
 import com.domain.employee;
-import com.service.EmpService;
-import com.service.MenuService;
-import com.service.billService;
-import com.service.dinningTableService;
+import com.service.*;
 import com.utils.Utility;
 
 import java.util.List;
@@ -24,6 +21,7 @@ public class MHLview {
     private dinningTableDao dinningTableDao = new dinningTableDao();
     private MenuService menuService = new MenuService();
     private billService billService = new billService();
+    private MutiTableMenuService mutiTableMenuService = new MutiTableMenuService();
 
     public void orderTable() {
         System.out.println("================预定餐桌===================");
@@ -63,7 +61,6 @@ public class MHLview {
     }
 
     private void payBill() {
-        // TODO: 2022/8/2 20220802
         System.out.println("============================结账服务===========================");
         System.out.print("请选择要结账的餐桌编号(-1退出)：");
         int dinningTableID = Utility.readInt();
@@ -87,10 +84,9 @@ public class MHLview {
 
         System.out.print("结账方式(现金/支付宝/微信/其他)：");
         String payMode = Utility.readString(20, "");
-        // TODO: 2022/8/2 结账
-        if (billService.payAllBill(dinningTableID,payMode)) {
+        if (billService.payAllBill(dinningTableID, payMode)) {
             System.out.println("======结账成功======");
-        }else {
+        } else {
             System.out.println("======结账失败======");
             return;
         }
@@ -173,6 +169,11 @@ public class MHLview {
         }
     }
 
+    public void listBill2() {
+        System.out.println("\n编号\t\t菜品号\t\t菜品量\t\t金额\t\t桌号\t\t日期\t\t\t\t\t\t\t状态\t\t菜品名");
+        mutiTableMenuService.listBill();
+    }
+
     public void secondMenu(employee emp) {
         while (loop) {
             System.out.println("==========================满汉楼二级菜单[" + emp.getName() + "]==========================");
@@ -185,7 +186,6 @@ public class MHLview {
             System.out.println("\t\t 9.退出满汉楼");
             System.out.print("请输入你的选择：");
             int i = Utility.readInt(1);
-            // TODO: 2022/7/25 功能完善
             switch (i) {
                 case 1:
                     listDinningTable();
@@ -200,15 +200,13 @@ public class MHLview {
                     orderMenu(emp);
                     break;
                 case 5:
-                    listBill1();
+                    listBill2();
                     break;
                 case 6:
-                    // TODO: 2022/8/1 结账
                     //1.查看某个餐桌是否有未结账的菜单
                     //2.修改bill表的状态（state）与dinningTable表的信息
                     //3.
                     payBill();
-                    System.out.println("结账");
                     break;
                 case 9:
                     System.out.println("退出满汉楼系统");
