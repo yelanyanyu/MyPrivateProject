@@ -8,20 +8,20 @@ public class students {
     Integer id;
     String name;
     String classname;
-    String Chinese;
-    String math;
-    String English;
+    Integer Chinese;
+    Integer math;
+    Integer English;
 
-    public students(Integer id, String name, String classname, String chinese, String math, String english) {
+    public students() {
+    }
+
+    public students(Integer id, String name, String classname, Integer chinese, Integer math, Integer english) {
         this.id = id;
         this.name = name;
         this.classname = classname;
         Chinese = chinese;
         this.math = math;
         English = english;
-    }
-
-    public students() {
     }
 
     public Integer getId() {
@@ -48,33 +48,33 @@ public class students {
         this.classname = classname;
     }
 
-    public String getChinese() {
+    public Integer getChinese() {
         return Chinese;
     }
 
-    public void setChinese(String chinese) {
+    public void setChinese(Integer chinese) {
         Chinese = chinese;
     }
 
-    public String getMath() {
+    public Integer getMath() {
         return math;
     }
 
-    public void setMath(String math) {
+    public void setMath(Integer math) {
         this.math = math;
     }
 
-    public String getEnglish() {
+    public Integer getEnglish() {
         return English;
     }
 
-    public void setEnglish(String english) {
+    public void setEnglish(Integer english) {
         English = english;
     }
 
     @Override
     public String toString() {
-        return "students{" +
+        return "\nstudents{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", classname='" + classname + '\'' +
