@@ -200,6 +200,7 @@ public class MHLview {
                     orderMenu(emp);
                     break;
                 case 5:
+//                    listBill1();
                     listBill2();
                     break;
                 case 6:
