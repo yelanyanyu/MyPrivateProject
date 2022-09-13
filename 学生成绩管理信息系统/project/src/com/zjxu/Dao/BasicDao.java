@@ -21,6 +21,7 @@ import java.util.Set;
  * @author yelanyanyu@zjxu.edu.cn
  * @version 1.0
  */
+@SuppressWarnings({"all"})
 public class BasicDao<T> {
     private QueryRunner queryRunner = new QueryRunner();
 
