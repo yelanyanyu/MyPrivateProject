@@ -1,4 +1,4 @@
-package com.zjxu.Bean;
+package com.zjxu.studentManageSystem.Bean;
 
 /**
  * @author yelanyanyu@zjxu.edu.cn

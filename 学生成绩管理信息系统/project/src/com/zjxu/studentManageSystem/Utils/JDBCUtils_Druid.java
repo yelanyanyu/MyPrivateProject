@@ -1,4 +1,4 @@
-package com.zjxu.Utils;
+package com.zjxu.studentManageSystem.Utils;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 

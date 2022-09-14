@@ -1,13 +1,8 @@
-package com.zjxu.service;
+package com.zjxu.studentManageSystem.service;
 
-import com.zjxu.Bean.students;
-import com.zjxu.Dao.studentDao;
-import com.zjxu.Utils.JDBCUtils_Druid;
+import com.zjxu.studentManageSystem.Bean.students;
+import com.zjxu.studentManageSystem.Dao.studentDao;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
@@ -19,10 +14,10 @@ import java.util.Map;
 public class studentsService {
     studentDao studentDao = new studentDao();
 
-    public void findByName(String name) {
+    public students findByName(String name) {
         String sql = "select * from students where `name`=?";
         students students = studentDao.QuerySingleLine(sql, students.class, name);
-        System.out.println(students);
+        return students;
     }
 
     public void findById(String Id) {

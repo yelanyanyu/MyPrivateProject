@@ -1,6 +1,6 @@
-package com.zjxu.view;
+package com.zjxu.studentManageSystem.Run;
 
-import com.zjxu.service.studentsService;
+import com.zjxu.studentManageSystem.service.studentsService;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
  * @version 1.0
  */
 public class MyTest {
-    studentsService studentsService = new studentsService();
+    com.zjxu.studentManageSystem.service.studentsService studentsService = new studentsService();
 
     @Test
     public void Test_01() {
@@ -60,5 +60,16 @@ public class MyTest {
         studentsService.findMinChinese();
         studentsService.findMinMath();
         studentsService.findMinEnglish();
+    }
+
+    @Test
+    public void Test_10() {
+        String reg = "^[A-Z]+[\\d|_|a-z|A-Z]*$";
+        String str = "z1234_afjsf";
+        if (str.matches(reg)) {
+            System.out.println("正确");
+        } else {
+            System.out.println("错误");
+        }
     }
 }

@@ -1,6 +1,6 @@
-package com.zjxu.Dao;
+package com.zjxu.studentManageSystem.Dao;
 
-import com.zjxu.Bean.students;
+import com.zjxu.studentManageSystem.Bean.students;
 
 /**
  * @author yelanyanyu@zjxu.edu.cn

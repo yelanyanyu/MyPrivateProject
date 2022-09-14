@@ -1,8 +1,7 @@
-package com.zjxu.Dao;
+package com.zjxu.studentManageSystem.Dao;
 
-import com.zjxu.Utils.JDBCUtils_Druid;
+import com.zjxu.studentManageSystem.Utils.JDBCUtils_Druid;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
@@ -15,7 +14,6 @@ import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @author yelanyanyu@zjxu.edu.cn
