@@ -27,12 +27,12 @@ public class usersService {
         if (!username.matches("^[a-z|A-Z]+[\\d|_|a-z|A-Z]*$")) {
             return 2;
         }
-        if (!pwd.matches("^[A-Z]+[\\d|_|a-z|A-Z]*$")) {
+        if (!pwd.matches("^[A-Z]+[\\d|_|a-z|A-Z]*$") && pwd.length() < 6) {
             return 2;
         }
         students student = studentsService.findByName(username);
         String sql = "insert into users values(?,md5(?),0)";
-        return student != null ? (usersDao.update(sql, username, pwd) > 0 ? 1 : 0) : 0;
+        return student == null ? (usersDao.update(sql, username, pwd) > 0 ? 1 : 0) : 0;
     }
 
     public int Exit(String username, String pwd) {
