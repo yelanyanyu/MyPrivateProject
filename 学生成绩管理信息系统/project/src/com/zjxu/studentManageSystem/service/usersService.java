@@ -13,8 +13,8 @@ public class usersService {
     private studentsService studentsService = new studentsService();
 
     public int Login(String username, String pwd) {
-        String sql = "update users set isLogin=1 where username=?";
-        return usersDao.update(sql, username);
+        String sql = "update users set isLogin=1 where username=? and pwd=md5(?)";
+        return usersDao.update(sql, username, pwd);
     }
 
     /**

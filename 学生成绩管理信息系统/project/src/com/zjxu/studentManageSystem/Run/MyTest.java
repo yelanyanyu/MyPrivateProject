@@ -72,4 +72,14 @@ public class MyTest {
             System.out.println("错误");
         }
     }
+
+    @Test
+    public void Test_11() {
+        studentsService.getExcellenceRateAll("math");
+    }
+
+    @Test
+    public void Test_12() {
+        studentsService.getFailureRateAll("Chinese");
+    }
 }

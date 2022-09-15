@@ -209,4 +209,30 @@ public class studentsService {
             System.out.println(map);
         }
     }
+
+    //得到总人数
+    public int NumsOfStudents() {
+        String sql = "select count(*) from students";
+        return studentDao.QueryByMap(sql).size();
+    }
+
+    public void getExcellenceRateAll(String course) {
+        String sql = "SELECT classname,COUNT(CASE WHEN " + course + ">=90 THEN 1 ELSE NULL END)/COUNT(*) AS youxiulv FROM students \n" +
+                "\tGROUP BY classname\n" +
+                "\tORDER BY youxiulv DESC";
+        List<Map<String, Object>> mapList = studentDao.QueryByMap(sql);
+        for (Map<String, Object> map : mapList) {
+            System.out.println(map);
+        }
+    }
+
+    public void getFailureRateAll(String course) {
+        String sql = "SELECT classname,COUNT(CASE WHEN " + course + "<90 THEN 1 ELSE NULL END)/COUNT(*) AS youxiulv FROM students \n" +
+                "\tGROUP BY classname\n" +
+                "\tORDER BY youxiulv DESC";
+        List<Map<String, Object>> mapList = studentDao.QueryByMap(sql);
+        for (Map<String, Object> map : mapList) {
+            System.out.println(map);
+        }
+    }
 }

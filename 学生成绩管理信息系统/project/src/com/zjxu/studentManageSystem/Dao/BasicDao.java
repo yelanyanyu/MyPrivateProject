@@ -21,7 +21,7 @@ import java.util.Map;
  */
 @SuppressWarnings({"all"})
 public class BasicDao<T> {
-    private QueryRunner queryRunner = new QueryRunner();
+    private QueryRunner queryRunner = new QueryRunner(true);
 
     public int update(String sql, Object... param) {
         Connection connection = null;
