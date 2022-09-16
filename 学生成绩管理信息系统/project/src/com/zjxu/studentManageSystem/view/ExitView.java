@@ -1,6 +1,6 @@
 package com.zjxu.studentManageSystem.view;
 
-import com.zjxu.studentManageSystem.Utils.Utility;
+import com.zjxu.studentManageSystem.Utils.inputUtility;
 
 /**
  * @author yelanyanyu@zjxu.edu.cn
@@ -14,7 +14,7 @@ public class ExitView{
         System.out.println("您确定退出吗？退出选1，否则选0");
         while (loop) {
             System.out.print("你的选择：");
-            int i = Utility.readInt();
+            int i = inputUtility.readInt();
             if (i == 1) {
                 System.exit(0);
                 loop = false;

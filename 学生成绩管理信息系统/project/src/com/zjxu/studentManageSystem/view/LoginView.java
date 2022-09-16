@@ -1,9 +1,10 @@
 package com.zjxu.studentManageSystem.view;
 
-import com.zjxu.studentManageSystem.Utils.Utility;
+import com.zjxu.studentManageSystem.Utils.inputUtility;
+import com.zjxu.studentManageSystem.Utils.ViewUtils;
 import com.zjxu.studentManageSystem.service.usersService;
 
-import static com.zjxu.studentManageSystem.view.AllView.exitView;
+import static com.zjxu.studentManageSystem.Utils.ViewUtils.exitView;
 
 /**
  * @author yelanyanyu@zjxu.edu.cn
@@ -17,16 +18,16 @@ public class LoginView{
         System.out.println("=======登录=======");
         while (loop) {
             System.out.println("是否退出程序？1退出");
-            int i = Utility.readInt();
+            int i = inputUtility.readInt();
             if (i == 1) {
                 loop = false;
                 exitView.exitSure();
             }
             System.out.print("username:");
-            String username = Utility.readString(64);
+            String username = inputUtility.readString(64);
             System.out.print("password:");
-            String pwd = Utility.readString(64);
-            int login = AllView.usersService.Login(username, pwd);
+            String pwd = inputUtility.readString(64);
+            int login = ViewUtils.usersService.Login(username, pwd);
             if (login == 1) {
                 methodView.methodView();
                 loop = false;

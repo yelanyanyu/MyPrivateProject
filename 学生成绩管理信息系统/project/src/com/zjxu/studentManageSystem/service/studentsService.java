@@ -14,25 +14,31 @@ import java.util.Map;
 public class studentsService {
     studentDao studentDao = new studentDao();
 
+    public List<students> AllStudents() {
+        String sql = "select * from students";
+        List<students> studentsList = studentDao.QueryMany(sql, students.class);
+        return studentsList;
+    }
+
     public students findByName(String name) {
         String sql = "select * from students where `name`=?";
         students students = studentDao.QuerySingleLine(sql, students.class, name);
         return students;
     }
 
-    public void findById(String Id) {
+    public students findById(String Id) {
         String sql = "select * from students where id=?";
         students students = studentDao.QuerySingleLine(sql, students.class, Id);
-        System.out.println(students);
+        return students;
     }
 
-    public void findByClassname(String Classname) {
+    public List<students> findByClassname(String Classname) {
         String sql = "select * from students where Classname=?";
-        students students = studentDao.QuerySingleLine(sql, students.class, Classname);
-        System.out.println(students);
+        List<students> students = studentDao.QueryMany(sql, students.class, Classname);
+        return students;
     }
 
-    public void OrderByChinese(String str) {
+    public List<students> OrderByChinese(String str) {
         String sql;
         if (str.equals("up")) {
             sql = "select * from students order by Chinese";
@@ -42,10 +48,10 @@ public class studentsService {
             sql = "";
         }
         List<students> students = studentDao.QueryMany(sql, students.class);
-        System.out.println(students);
+        return students;
     }
 
-    public void OrderMath(String str) {
+    public List<students> OrderMath(String str) {
         String sql;
         if (str.equals("up")) {
             sql = "select * from students order by math";
@@ -56,10 +62,10 @@ public class studentsService {
             throw new RuntimeException("up or down!");
         }
         List<students> students = studentDao.QueryMany(sql, students.class);
-        System.out.println(students);
+        return students;
     }
 
-    public void OrderByEnglish(String str) {
+    public List<students> OrderByEnglish(String str) {
         String sql;
         if (str.equals("up")) {
             sql = "select * from students order by English";
@@ -69,13 +75,13 @@ public class studentsService {
             sql = "";
         }
         List<students> students = studentDao.QueryMany(sql, students.class);
-        System.out.println(students);
+        return students;
     }
 
-    public void OrderByCourseSum(String str) {
+    public List<Map<String, Object>> OrderByCourseSum(String str) {
         String sql;
         if (str.equals("up")) {
-            sql = "SELECT `name` , (Chinese+English+math) AS `sum` FROM students\n" +
+            sql = "SELECT id,`name` , classname, (Chinese+English+math) AS `sum` FROM students\n" +
                     "\tORDER BY `sum`";
         } else if (str.equals("down")) {
             sql = "SELECT `name` , (Chinese+English+math) AS `sum` FROM students\n" +
@@ -84,12 +90,10 @@ public class studentsService {
             sql = "";
         }
         List<Map<String, Object>> mapList = studentDao.QueryByMap(sql);
-        for (Map<String, Object> map : mapList) {
-            System.out.println(map);
-        }
+        return mapList;
     }
 
-    public void OrderById(String str) {
+    public List<students> OrderById(String str) {
         String sql;
         if (str.equals("up")) {
             sql = "SELECT *  FROM students\n" +
@@ -101,13 +105,13 @@ public class studentsService {
             sql = "";
         }
         List<students> students = studentDao.QueryMany(sql, students.class);
-        System.out.println(students);
+        return students;
     }
 
-    public void OrderByAvg(String str) {
+    public List<Map<String, Object>> OrderByAvg(String str) {
         String sql;
         if (str.equals("up")) {
-            sql = "SELECT `name` , (Chinese+English+math)/3 AS `avg`,id FROM students\n" +
+            sql = "SELECT id,`name` , classname,(Chinese+English+math)/3 AS `avg` FROM students\n" +
                     "\tORDER BY `avg`";
         } else if (str.equals("down")) {
             sql = "SELECT `name` , (Chinese+English+math)/3 AS `avg`,id FROM students\n" +
@@ -116,9 +120,7 @@ public class studentsService {
             sql = "";
         }
         List<Map<String, Object>> mapList = studentDao.QueryByMap(sql);
-        for (Map<String, Object> map : mapList) {
-            System.out.println(map);
-        }
+        return mapList;
     }
 
     public int add(int id, String name, String classname, int Chinese, int math, int English) {

@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 	
 */
-public class Utility {
+public class inputUtility {
 	//静态属性。。。
     private static Scanner scanner = new Scanner(System.in);
 

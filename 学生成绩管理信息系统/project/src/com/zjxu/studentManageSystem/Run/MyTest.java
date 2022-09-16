@@ -3,6 +3,9 @@ package com.zjxu.studentManageSystem.Run;
 import com.zjxu.studentManageSystem.service.studentsService;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author yelanyanyu@zjxu.edu.cn
  * @version 1.0
@@ -39,8 +42,11 @@ public class MyTest {
 
     @Test
     public void Test_06() {
-        studentsService.OrderByAvg("up");
+        List<Map<String, Object>> up = studentsService.OrderByAvg("up");
         studentsService.OrderByAvg("down");
+        for (Map<String, Object> stringObjectMap : up) {
+            System.out.println(stringObjectMap);
+        }
     }
 
     @Test
