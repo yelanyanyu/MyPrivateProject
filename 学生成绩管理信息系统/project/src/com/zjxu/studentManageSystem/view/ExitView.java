@@ -6,7 +6,7 @@ import com.zjxu.studentManageSystem.Utils.Utility;
  * @author yelanyanyu@zjxu.edu.cn
  * @version 1.0
  */
-public class ExitView extends AllView{
+public class ExitView{
 
 
     public void exitSure() {
@@ -16,7 +16,7 @@ public class ExitView extends AllView{
             System.out.print("你的选择：");
             int i = Utility.readInt();
             if (i == 1) {
-                System.exit(1);
+                System.exit(0);
                 loop = false;
             } else if (i == 0) {
                 methodView.methodView();
