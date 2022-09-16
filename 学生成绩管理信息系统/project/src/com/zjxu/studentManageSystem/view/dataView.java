@@ -19,14 +19,21 @@ public class dataView {
 
     //students表全列字段值展示
     private static void allStudentsCols(students student) {
-        System.out.println(student.getId() + "\t\t" + student.getName() + "\t\t"
-                + student.getClassname() + "\t\t" + student.getChinese() + "\t\t" +
-                student.getMath() + "\t\t" + student.getEnglish() + "\t\t");
+        Integer id = student.getId();
+        String name = student.getName();
+        String classname = student.getClassname();
+        Integer chinese = student.getChinese();
+        Integer math = student.getMath();
+        Integer English = student.getEnglish();
+        System.out.printf("%-8s\t%-8s\t%-8s\t%-8s\t%-8s\t%-8s\t\n", id, name, classname, chinese, math, English);
+//        System.out.println(String.format("%8s", student.getId()) + "\t\t\t" + String.format("%8s", student.getName()) + "\t\t\t"
+//                + String.format("%8s", student.getClassname()) + "\t\t\t" + String.format("%8s", student.getChinese()) + "\t\t\t" +
+//                String.format("%8s", student.getMath()) + "\t\t\t" + String.format("%8s", student.getEnglish()) + "\t\t\t");
     }
 
     //全列展示
     private static void AllColView() {
-        System.out.println("id\t\tname\t\tclassname\t\tChinese\t\tmath\t\tEnglish\t\t");
+        System.out.println("id\t\t\tname\t\tclassname\tChinese\t\tmath\t\tEnglish\t\t\t");
     }
 
     public static void studentsListView(List<students> studentsList) {
@@ -41,17 +48,18 @@ public class dataView {
             Set<Map.Entry<String, Object>> entries = map.entrySet();
             for (Map.Entry<String, Object> entry : entries) {
                 Object value = entry.getValue();
-                System.out.println(value + "\t\t");
+                System.out.printf("%-8s\t", value);
             }
+            System.out.println();
         }
     }
 
     public static void mapListViewOfSumOrAvg(List<Map<String, Object>> mapList, String str) {
         if ("Sum".equals(str)) {
-            System.out.println("id\t\tname\t\tclassname\t\tsum\t\t");
+            System.out.println("id\t\t\tname\t\tclassname\tsum\t\t");
             mapListView(mapList);
         } else if ("Avg".equals(str)) {
-            System.out.println("id\t\tname\t\tclassname\t\tavg\t\t");
+            System.out.println("id\t\t\tname\t\tclassname\tavg\t\t");
             mapListView(mapList);
         }
     }

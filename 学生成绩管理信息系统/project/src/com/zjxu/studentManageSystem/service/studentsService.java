@@ -84,7 +84,7 @@ public class studentsService {
             sql = "SELECT id,`name` , classname, (Chinese+English+math) AS `sum` FROM students\n" +
                     "\tORDER BY `sum`";
         } else if (str.equals("down")) {
-            sql = "SELECT `name` , (Chinese+English+math) AS `sum` FROM students\n" +
+            sql = "SELECT id,`name` , classname, (Chinese+English+math) AS `sum` FROM students\n" +
                     "\tORDER BY `sum` desc";
         } else {
             sql = "";
@@ -114,7 +114,7 @@ public class studentsService {
             sql = "SELECT id,`name` , classname,(Chinese+English+math)/3 AS `avg` FROM students\n" +
                     "\tORDER BY `avg`";
         } else if (str.equals("down")) {
-            sql = "SELECT `name` , (Chinese+English+math)/3 AS `avg`,id FROM students\n" +
+            sql = "SELECT id,`name` , classname, (Chinese+English+math)/3 AS `avg`,id FROM students\n" +
                     "\tORDER BY `avg` desc";
         } else {
             sql = "";
@@ -144,31 +144,25 @@ public class studentsService {
         return update > 0 ? true : false;
     }
 
-    public void findMaxChinese() {
-        String sql = "SELECT id,`name`,classname,Chinese FROM students \n" +
+    public List<students> findMaxChinese() {
+        String sql = "SELECT * FROM students \n" +
                 "\tWHERE Chinese=(SELECT MAX(Chinese) FROM students)";
-        List<Map<String, Object>> mapList = studentDao.QueryByMap(sql);
-        for (Map<String, Object> map : mapList) {
-            System.out.println(map);
-        }
+        List<students> students = studentDao.QueryMany(sql,students.class);
+        return students;
     }
 
-    public void findMaxMath() {
-        String sql = "SELECT id,`name`,classname,math FROM students \n" +
+    public List<students> findMaxMath() {
+        String sql = "SELECT * FROM students \n" +
                 "\tWHERE math=(SELECT MAX(math) FROM students)";
-        List<Map<String, Object>> mapList = studentDao.QueryByMap(sql);
-        for (Map<String, Object> map : mapList) {
-            System.out.println(map);
-        }
+        List<students> students = studentDao.QueryMany(sql,students.class);
+        return students;
     }
 
-    public void findMaxEnglish() {
-        String sql = "SELECT id,`name`,classname,English FROM students \n" +
+    public List<students> findMaxEnglish() {
+        String sql = "SELECT * FROM students \n" +
                 "\tWHERE English=(SELECT MAX(English) FROM students)";
-        List<Map<String, Object>> mapList = studentDao.QueryByMap(sql);
-        for (Map<String, Object> map : mapList) {
-            System.out.println(map);
-        }
+        List<students> students = studentDao.QueryMany(sql,students.class);
+        return students;
 //        Connection connection = JDBCUtils_Druid.getConnection();
 //        try {
 //            Statement statement = connection.createStatement();
@@ -185,31 +179,25 @@ public class studentsService {
 //        }
     }
 
-    public void findMinChinese() {
+    public List<students> findMinChinese() {
         String sql = "SELECT id,`name`,classname,Chinese FROM students \n" +
                 "\tWHERE Chinese=(SELECT Min(Chinese) FROM students)";
-        List<Map<String, Object>> mapList = studentDao.QueryByMap(sql);
-        for (Map<String, Object> map : mapList) {
-            System.out.println(map);
-        }
+        List<students> students = studentDao.QueryMany(sql,students.class);
+        return students;
     }
 
-    public void findMinMath() {
+    public List<students> findMinMath() {
         String sql = "SELECT id,`name`,classname,math FROM students \n" +
                 "\tWHERE Chinese=(SELECT Min(math) FROM students)";
-        List<Map<String, Object>> mapList = studentDao.QueryByMap(sql);
-        for (Map<String, Object> map : mapList) {
-            System.out.println(map);
-        }
+        List<students> students = studentDao.QueryMany(sql,students.class);
+        return students;
     }
 
-    public void findMinEnglish() {
+    public List<students> findMinEnglish() {
         String sql = "SELECT id,`name`,classname,English FROM students \n" +
                 "\tWHERE Chinese=(SELECT Min(English) FROM students)";
-        List<Map<String, Object>> mapList = studentDao.QueryByMap(sql);
-        for (Map<String, Object> map : mapList) {
-            System.out.println(map);
-        }
+        List<students> students = studentDao.QueryMany(sql,students.class);
+        return students;
     }
 
     //得到总人数
@@ -218,23 +206,19 @@ public class studentsService {
         return studentDao.QueryByMap(sql).size();
     }
 
-    public void getExcellenceRateAll(String course) {
+    public List<Map<String, Object>> getExcellenceRateAll(String course) {
         String sql = "SELECT classname,COUNT(CASE WHEN " + course + ">=90 THEN 1 ELSE NULL END)/COUNT(*) AS youxiulv FROM students \n" +
                 "\tGROUP BY classname\n" +
                 "\tORDER BY youxiulv DESC";
         List<Map<String, Object>> mapList = studentDao.QueryByMap(sql);
-        for (Map<String, Object> map : mapList) {
-            System.out.println(map);
-        }
+        return mapList;
     }
 
-    public void getFailureRateAll(String course) {
+    public List<Map<String, Object>> getFailureRateAll(String course) {
         String sql = "SELECT classname,COUNT(CASE WHEN " + course + "<90 THEN 1 ELSE NULL END)/COUNT(*) AS youxiulv FROM students \n" +
                 "\tGROUP BY classname\n" +
                 "\tORDER BY youxiulv DESC";
         List<Map<String, Object>> mapList = studentDao.QueryByMap(sql);
-        for (Map<String, Object> map : mapList) {
-            System.out.println(map);
-        }
+        return mapList;
     }
 }

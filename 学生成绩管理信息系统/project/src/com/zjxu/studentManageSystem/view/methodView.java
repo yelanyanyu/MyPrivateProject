@@ -23,7 +23,7 @@ public class methodView {
         System.out.print("你的选择：");
         int i = inputUtility.readInt();
         if (i == 1) {
-
+            findView();
         } else if (i == 2) {
 
         } else if (i == 3) {
@@ -107,19 +107,33 @@ public class methodView {
                     System.out.print("输入up升序，down降序：");
                     String choice4 = inputUtility.readString(64);
                     List<Map<String, Object>> mapListSum = ViewUtils.studentsService.OrderByCourseSum(choice4);
-                    dataView.mapListViewOfSumOrAvg(mapListSum,"Sum");
+                    dataView.mapListViewOfSumOrAvg(mapListSum, "Sum");
                     break;
                 case 9:
                     System.out.print("输入up升序，down降序：");
                     String choice5 = inputUtility.readString(64);
                     List<Map<String, Object>> mapListAvg = ViewUtils.studentsService.OrderByAvg(choice5);
-                    dataView.mapListViewOfSumOrAvg(mapListAvg,"Avg");
+                    dataView.mapListViewOfSumOrAvg(mapListAvg, "Avg");
                     break;
                 case 10:
-                    // TODO: 2022/9/16 按学号对全部学生排序
+                    System.out.print("输入up升序，down降序：");
+                    String choice6 = inputUtility.readString(64);
+                    List<students> studentsList1 = ViewUtils.studentsService.OrderById(choice6);
+                    dataView.studentsListView(studentsList1);
                     break;
                 case 11:
-                    // TODO: 2022/9/16 查询每个课程的最高分
+                    System.out.print("请输入课程：");
+                    String selectedCourse = inputUtility.readString(64);
+                    if (selectedCourse.equals("Chinese")) {
+                        List<students> maxChinese = ViewUtils.studentsService.findMaxChinese();
+                        dataView.studentsListView(maxChinese);
+                    } else if (selectedCourse.equals("math")) {
+                        List<students> maxMath = ViewUtils.studentsService.findMaxMath();
+                        dataView.studentsListView(maxMath);
+                    } else if (selectedCourse.equals("English")) {
+                        List<students> maxEnglish = ViewUtils.studentsService.findMaxEnglish();
+                        dataView.studentsListView(maxEnglish);
+                    }
                     break;
                 case 12:
                     // TODO: 2022/9/16 查询每个班级某门课程的优秀率
