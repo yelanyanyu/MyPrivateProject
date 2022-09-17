@@ -27,7 +27,7 @@ public class usersService {
         if (!username.matches("^[a-z|A-Z]+[\\d|_|a-z|A-Z]*$")) {
             return 2;
         }
-        if (!pwd.matches("^[A-Z]+[\\d|_|a-z|A-Z]*$") && pwd.length() < 6) {
+        if (!pwd.matches("^[A-Z]+[\\d|_|a-z|A-Z]*$") || pwd.length() < 6) {
             return 2;
         }
         students student = studentsService.findByName(username);

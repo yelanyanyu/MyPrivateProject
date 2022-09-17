@@ -25,7 +25,7 @@ public class methodView {
         if (i == 1) {
             findView();
         } else if (i == 2) {
-
+            updateView();
         } else if (i == 3) {
             ViewUtils.exitView.exitSure();
         }
@@ -148,6 +148,8 @@ public class methodView {
     public static void updateView() {
 
     }
+
+
 
 
 }
