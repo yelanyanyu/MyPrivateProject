@@ -1,5 +1,6 @@
 package com.zjxu.studentManageSystem.Run;
 
+import com.zjxu.studentManageSystem.Utils.ViewUtils;
 import com.zjxu.studentManageSystem.service.studentsService;
 import org.junit.jupiter.api.Test;
 
@@ -87,5 +88,11 @@ public class MyTest {
     @Test
     public void Test_12() {
         studentsService.getFailureRateAll("Chinese");
+    }
+
+    @Test
+    public void Test_13() {
+        int register = ViewUtils.usersService.Register("mubai", "Mubai123");
+        System.out.println(register);
     }
 }

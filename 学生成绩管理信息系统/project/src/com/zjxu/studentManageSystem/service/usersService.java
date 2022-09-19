@@ -1,6 +1,6 @@
 package com.zjxu.studentManageSystem.service;
 
-import com.zjxu.studentManageSystem.Bean.students;
+import com.zjxu.studentManageSystem.Bean.users;
 import com.zjxu.studentManageSystem.Dao.usersDao;
 
 /**
@@ -30,13 +30,18 @@ public class usersService {
         if (!pwd.matches("^[A-Z]+[\\d|_|a-z|A-Z]*$") || pwd.length() < 6) {
             return 2;
         }
-        students student = studentsService.findByName(username);
+        users user = isExist(username);
         String sql = "insert into users values(?,md5(?),0)";
-        return student == null ? (usersDao.update(sql, username, pwd) > 0 ? 1 : 0) : 0;
+        return user == null ? (usersDao.update(sql, username, pwd) > 0 ? 1 : 0) : 0;
     }
 
     public int Exit(String username, String pwd) {
         String sql = "update users set isLogin=0 where username=?";
         return usersDao.update(sql, username);
+    }
+
+    private users isExist(String username) {
+        String sql = "select * from users where username=?";
+        return usersDao.QuerySingleLine(sql, users.class, username);
     }
 }

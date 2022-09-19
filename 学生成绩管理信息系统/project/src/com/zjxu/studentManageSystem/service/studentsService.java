@@ -127,15 +127,16 @@ public class studentsService {
         String sql = "insert into students values(?,?,?,?,?,?)";
         // TODO: 2022/9/10 正则表达式验证班级格式
         try {
-            return studentDao.update(sql, id, name, classname, Chinese, math, English);
+            return studentDao.update(sql, null, name, classname, Chinese, math, English);
         } catch (Exception e) {
-            throw new RuntimeException("加入错误，该同学或已经存在！");
+            System.out.println("加入错误，该同学或已经存在！");
         }
+        return 0;
     }
 
-    public int updateChineseById(int id, String name, String classname, int Chinese, int math, int English) {
-        String sql = "update students set Chinese=? where id=?";
-        return studentDao.update(sql, classname, id);
+    public int updateCourseById(int id, int Chinese, int math, int English) {
+        String sql = "update students set Chinese=?,math=?,English=? where id=?";
+        return studentDao.update(sql, Chinese, math, English, id);
     }
 
     public boolean deleteLineById(int id) {
@@ -147,21 +148,21 @@ public class studentsService {
     public List<students> findMaxChinese() {
         String sql = "SELECT * FROM students \n" +
                 "\tWHERE Chinese=(SELECT MAX(Chinese) FROM students)";
-        List<students> students = studentDao.QueryMany(sql,students.class);
+        List<students> students = studentDao.QueryMany(sql, students.class);
         return students;
     }
 
     public List<students> findMaxMath() {
         String sql = "SELECT * FROM students \n" +
                 "\tWHERE math=(SELECT MAX(math) FROM students)";
-        List<students> students = studentDao.QueryMany(sql,students.class);
+        List<students> students = studentDao.QueryMany(sql, students.class);
         return students;
     }
 
     public List<students> findMaxEnglish() {
         String sql = "SELECT * FROM students \n" +
                 "\tWHERE English=(SELECT MAX(English) FROM students)";
-        List<students> students = studentDao.QueryMany(sql,students.class);
+        List<students> students = studentDao.QueryMany(sql, students.class);
         return students;
 //        Connection connection = JDBCUtils_Druid.getConnection();
 //        try {
@@ -182,21 +183,21 @@ public class studentsService {
     public List<students> findMinChinese() {
         String sql = "SELECT id,`name`,classname,Chinese FROM students \n" +
                 "\tWHERE Chinese=(SELECT Min(Chinese) FROM students)";
-        List<students> students = studentDao.QueryMany(sql,students.class);
+        List<students> students = studentDao.QueryMany(sql, students.class);
         return students;
     }
 
     public List<students> findMinMath() {
         String sql = "SELECT id,`name`,classname,math FROM students \n" +
                 "\tWHERE Chinese=(SELECT Min(math) FROM students)";
-        List<students> students = studentDao.QueryMany(sql,students.class);
+        List<students> students = studentDao.QueryMany(sql, students.class);
         return students;
     }
 
     public List<students> findMinEnglish() {
         String sql = "SELECT id,`name`,classname,English FROM students \n" +
                 "\tWHERE Chinese=(SELECT Min(English) FROM students)";
-        List<students> students = studentDao.QueryMany(sql,students.class);
+        List<students> students = studentDao.QueryMany(sql, students.class);
         return students;
     }
 

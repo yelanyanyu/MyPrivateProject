@@ -19,22 +19,22 @@ public class methodView {
         if (inputUtility.readInt() == 1) {
             ViewUtils.exitView.exitSure();
         }
-        System.out.println("输入1查询相关信息，输入2修改信息，输入3退出：");
+        System.out.println("输入1查询相关信息，输入2修改信息，输入-1退出：");
         System.out.print("你的选择：");
         int i = inputUtility.readInt();
         if (i == 1) {
             findView();
         } else if (i == 2) {
             updateView();
-        } else if (i == 3) {
+        } else if (i == -1) {
             ViewUtils.exitView.exitSure();
         }
     }
 
     public static void findView() {
         boolean loop = true;
-        System.out.println("=========查询界面=========");
         while (loop) {
+            System.out.println("=========查询界面=========");
             System.out.println("1:按学号查询学生");
             System.out.println("2:按姓名查询学生");
             System.out.println("3:按班级查询学生");
@@ -136,20 +136,90 @@ public class methodView {
                     }
                     break;
                 case 12:
-                    // TODO: 2022/9/16 查询每个班级某门课程的优秀率
+                    System.out.print("请输入查询的课程：");
+                    String course1 = inputUtility.readString(64);
+                    List<Map<String, Object>> excellenceRateAll = ViewUtils.studentsService.getExcellenceRateAll(course1);
+                    dataView.mapListViewOfRate(excellenceRateAll, course1);
                     break;
                 case 13:
-                    // TODO: 2022/9/16 查询每个班级某门课程的不及格率
+                    System.out.print("请输入查询的课程：");
+                    String course2 = inputUtility.readString(64);
+                    List<Map<String, Object>> failureRateAll = ViewUtils.studentsService.getFailureRateAll(course2);
+                    dataView.mapListViewOfRate(failureRateAll, course2);
                     break;
             }
         }
     }
 
     public static void updateView() {
-
+        boolean loop = true;
+        while (loop) {
+            System.out.println("=========修改界面=========");
+            System.out.println("1.增添记录；");
+            System.out.println("2.修改记录：");
+            System.out.println("3.删除记录：");
+            System.out.println("0:返回上一页面!");
+            System.out.println("-1:退出!");
+            int i = inputUtility.readInt();
+            switch (i) {
+                case 0:
+                    loop = false;
+                    methodView();
+                    break;
+                case -1:
+                    loop = false;
+                    ViewUtils.exitView.exitSure();
+                    break;
+                case 1:
+                    System.out.println("请输入你的信息：");
+                    System.out.print("学生学号：");
+                    int id = inputUtility.readInt();
+                    System.out.print("学生姓名：");
+                    String name = inputUtility.readString(64);
+                    System.out.print("学生班级：");
+                    String classname = inputUtility.readString(64);
+                    System.out.print("学生语文成绩：");
+                    int Chinese = inputUtility.readInt();
+                    System.out.print("学生数学成绩：");
+                    int math = inputUtility.readInt();
+                    System.out.print("学生英语成绩：");
+                    int English = inputUtility.readInt();
+                    int add = ViewUtils.studentsService.add(id, name, classname, Chinese, math, English);
+                    if (add > 0) {
+                        System.out.println("增添成功！！");
+                    } else {
+                        System.out.println("失败");
+                    }
+                    break;
+                case 2:
+                    System.out.print("学生学号：");
+                    System.out.print("学生语文成绩：");
+                    System.out.print("学生数学成绩：");
+                    System.out.print("学生英语成绩：");
+                    int id1 = inputUtility.readInt();
+                    int Chinese1 = inputUtility.readInt();
+                    int math1 = inputUtility.readInt();
+                    int English1 = inputUtility.readInt();
+                    int update = ViewUtils.studentsService.updateCourseById(id1, Chinese1, math1, English1);
+                    if (update > 0) {
+                        System.out.println("修改成功~");
+                    } else {
+                        System.out.println("修改失败！！！");
+                    }
+                    break;
+                case 3:
+                    System.out.print("学生学号：");
+                    int id2 = inputUtility.readInt();
+                    boolean b = ViewUtils.studentsService.deleteLineById(id2);
+                    if (b) {
+                        System.out.println("删除成功~");
+                    } else {
+                        System.out.println("删除失败！！！");
+                    }
+                    break;
+            }
+        }
     }
-
-
 
 
 }

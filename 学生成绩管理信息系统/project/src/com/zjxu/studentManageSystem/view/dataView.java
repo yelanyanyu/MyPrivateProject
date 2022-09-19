@@ -64,5 +64,18 @@ public class dataView {
         }
     }
 
+    public static void mapListViewOfRate(List<Map<String, Object>> mapList, String str) {
+        if("Chinese".equals(str)){
+            System.out.println("classname\tChineseRate");
+            mapListView(mapList);
+        }else if("math".equals(str)){
+            System.out.println("classname\tmathRate");
+            mapListView(mapList);
+        }else if("English".equals(str)){
+            System.out.println("classname\tEnglishRate");
+            mapListView(mapList);
+        }
+    }
+
 
 }
