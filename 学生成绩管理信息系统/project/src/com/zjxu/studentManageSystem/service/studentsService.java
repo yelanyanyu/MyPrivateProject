@@ -208,7 +208,7 @@ public class studentsService {
     }
 
     public List<Map<String, Object>> getExcellenceRateAll(String course) {
-        String sql = "SELECT classname,COUNT(CASE WHEN " + course + ">=90 THEN 1 ELSE NULL END)/COUNT(*) AS youxiulv FROM students \n" +
+        String sql = "SELECT classname,COUNT(CASE WHEN " + course + ">=80 THEN 1 ELSE NULL END)/COUNT(*) AS youxiulv FROM students \n" +
                 "\tGROUP BY classname\n" +
                 "\tORDER BY youxiulv DESC";
         List<Map<String, Object>> mapList = studentDao.QueryByMap(sql);
