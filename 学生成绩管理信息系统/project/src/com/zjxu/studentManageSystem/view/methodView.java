@@ -193,12 +193,12 @@ public class methodView {
                     break;
                 case 2:
                     System.out.print("学生学号：");
-                    System.out.print("学生语文成绩：");
-                    System.out.print("学生数学成绩：");
-                    System.out.print("学生英语成绩：");
                     int id1 = inputUtility.readInt();
+                    System.out.print("学生语文成绩：");
                     int Chinese1 = inputUtility.readInt();
+                    System.out.print("学生数学成绩：");
                     int math1 = inputUtility.readInt();
+                    System.out.print("学生英语成绩：");
                     int English1 = inputUtility.readInt();
                     int update = ViewUtils.studentsService.updateCourseById(id1, Chinese1, math1, English1);
                     if (update > 0) {

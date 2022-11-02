@@ -26,9 +26,6 @@ public class dataView {
         Integer math = student.getMath();
         Integer English = student.getEnglish();
         System.out.printf("%-8s\t%-8s\t%-8s\t%-8s\t%-8s\t%-8s\t\n", id, name, classname, chinese, math, English);
-//        System.out.println(String.format("%8s", student.getId()) + "\t\t\t" + String.format("%8s", student.getName()) + "\t\t\t"
-//                + String.format("%8s", student.getClassname()) + "\t\t\t" + String.format("%8s", student.getChinese()) + "\t\t\t" +
-//                String.format("%8s", student.getMath()) + "\t\t\t" + String.format("%8s", student.getEnglish()) + "\t\t\t");
     }
 
     //全列展示

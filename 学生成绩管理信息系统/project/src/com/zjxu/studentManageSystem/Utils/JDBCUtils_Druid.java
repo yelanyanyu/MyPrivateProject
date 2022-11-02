@@ -21,7 +21,7 @@ public class JDBCUtils_Druid {
     static {
         Properties properties = new Properties();
         try {
-            properties.load(new FileInputStream("D:\\我的代码\\我的项目\\学生成绩管理信息系统\\project\\src\\com\\zjxu\\studentManageSystem\\druid.properties"));
+            properties.load(new FileInputStream("D:\\myCode\\projects\\学生成绩管理信息系统\\project\\src\\com\\zjxu\\studentManageSystem\\druid.properties"));
             dataSource = DruidDataSourceFactory.createDataSource(properties);
         } catch (Exception e) {
             throw new RuntimeException(e);
